@@ -1,14 +1,15 @@
-/* [BLOQUE: Estilos Globales y Variables] */
+/* [BLOQUE: Estilos Globales y Variables - Estilo Netflix & Neon] */
 :root {
-    --primary: #6366f1;
-    --primary-light: #818cf8;
-    --accent: #f43f5e;
-    --bg: #0f172a;
-    --card-hover: #1e293b;
-    --text-main: #f8fafc;
-    --text-dim: #94a3b8;
-    --glass: rgba(255, 255, 255, 0.03);
+    --primary: #E50914; /* Rojo Netflix */
+    --primary-light: #ff1f1f;
+    --accent: #E50914;
+    --bg: #000000; /* Negro profundo */
+    --card-hover: #141414; /* Gris oscuro para cards */
+    --text-main: #ffffff;
+    --text-dim: #b3b3b3;
+    --glass: rgba(20, 20, 20, 0.7);
     --border: rgba(255, 255, 255, 0.1);
+    --neon-purple: #c400ff; /* Púrpura fluorescente */
 }
 
 /* [BLOQUE: Reset y Tipografía] */
@@ -28,19 +29,17 @@ body {
     align-items: center;
     padding: 2rem;
     background-image:
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 40%);
+        radial-gradient(circle at 50% -20%, rgba(229, 9, 20, 0.15) 0%, transparent 50%);
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 3.5rem;
+    font-weight: 800;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, var(--primary-light), var(--accent));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
+    color: var(--primary);
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
 }
 
 /* [BLOQUE: Sistema de Rejilla y Contenedores] */
@@ -52,27 +51,25 @@ h1 {
     gap: 2rem;
 }
 
-/* [BLOQUE: Componente Card (Glassmorphism)] */
+/* [BLOQUE: Componente Card] */
 .card {
     background: var(--glass);
-    backdrop-filter: blur(12px);
     border: 1px solid var(--border);
-    border-radius: 24px;
+    border-radius: 12px;
     padding: 2rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary);
+    transform: scale(1.02);
     background: var(--card-hover);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    color: var(--primary-light);
+    color: var(--text-main);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -86,35 +83,45 @@ h2 {
 }
 
 input {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1rem;
+    background: #333;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
     color: white;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
 }
 
 input:focus {
     outline: none;
-    border-color: var(--primary);
+    background: #454545;
+    border-bottom-color: var(--primary);
 }
 
 button {
     background: var(--primary);
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 1rem;
-    font-weight: 600;
+    border-radius: 4px;
+    padding: 0.85rem;
+    font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin-top: 0.5rem;
 }
 
 button:hover {
-    background: var(--primary-light);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    background: var(--neon-purple);
+    box-shadow: 0 0 25px var(--neon-purple), 0 0 50px rgba(196, 0, 255, 0.4);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+button:active {
+    transform: translateY(0);
 }
 
 /* [BLOQUE: Visualización de Datos] */
@@ -123,6 +130,7 @@ button:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -131,30 +139,33 @@ button:hover {
     }
 }
 
-.data-panel {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    padding: 1rem;
-    height: 500px;
-    overflow-y: auto;
-    border: 1px solid var(--border);
+.data-panel, .item-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* [BLOQUE: Estilos de Items (Reemplazo de JSON)] */
+.data-panel {
+    background: rgba(20, 20, 20, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+}
+
+/* [BLOQUE: Estilos de Items] */
 .item-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
     padding: 1.25rem;
     border-left: 4px solid var(--primary);
-    transition: transform 0.2s;
+    transition: all 0.2s;
 }
 
 .item-card:hover {
-    transform: scale(1.02);
     background: rgba(255, 255, 255, 0.08);
+    border-left-color: var(--neon-purple);
 }
 
 .item-header {
@@ -166,7 +177,7 @@ button:hover {
 
 .item-title {
     font-size: 1.15rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-main);
 }
 
@@ -179,22 +190,22 @@ button:hover {
     background: var(--primary);
     color: white;
     padding: 0.2rem 0.6rem;
-    border-radius: 20px;
+    border-radius: 4px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .item-sub-list {
     margin-top: 1rem;
     padding-top: 0.75rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sub-item-label {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--primary-light);
+    font-weight: 700;
+    color: var(--text-dim);
     margin-bottom: 0.5rem;
     display: block;
 }
@@ -206,27 +217,26 @@ button:hover {
 }
 
 .tag {
-    background: var(--glass);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     padding: 0.25rem 0.5rem;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 0.8rem;
     color: var(--text-dim);
 }
 
-/* [BLOQUE: Scrollbar Custom] */
+/* [BLOQUE: Scrollbar] */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #141414;
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 4px;
+    background: #333;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-dim);
+    background: var(--primary);
 }
 
 /* [BLOQUE: Feedback Visual (Toast)] */
@@ -235,12 +245,14 @@ button:hover {
     bottom: 2rem;
     right: 2rem;
     padding: 1rem 2rem;
-    border-radius: 12px;
+    border-radius: 4px;
     background: var(--primary);
     color: white;
+    font-weight: 700;
     transform: translateY(200%);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.4s ease;
     z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 .toast.show {
     transform: translateY(0);
